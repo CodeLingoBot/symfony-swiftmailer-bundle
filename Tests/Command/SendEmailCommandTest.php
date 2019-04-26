@@ -113,62 +113,15 @@ class SendEmailCommandTest extends \PHPUnit\Framework\TestCase
     /**
      * @return Container
      */
-    private function buildContainer(\Swift_Transport $transport, \Swift_Transport $realTransport, $name = 'default')
-    {
-        $mailer = new \Swift_Mailer($transport);
-
-        $container = new Container();
-        $container->set(sprintf('swiftmailer.mailer.%s', $name), $mailer);
-        $container->set(sprintf('swiftmailer.mailer.%s.transport.real', $name), $realTransport);
-        $container->setParameter('swiftmailer.mailers', [$name => $mailer]);
-        $container->setParameter(sprintf('swiftmailer.mailer.%s.spool.enabled', $name), true);
-
-        return $container;
-    }
+    
 
     /**
      * @return CommandTester
      */
-    private function executeCommand(ContainerInterface $container, $input = [], $options = [])
-    {
-        $kernel = $this->getMockBuilder(KernelInterface::class)->getMock();
-        $kernel->expects($this->any())->method('getContainer')->willReturn($container);
-        $kernel->expects($this->any())->method('getBundles')->willReturn([]);
-
-        $application = new Application($kernel);
-        $application->add(new SendEmailCommand());
-
-        $tester = new CommandTester($application->get('swiftmailer:spool:send'));
-        $tester->execute($input, $options);
-
-        return $tester;
-    }
+    
 
     /**
      * @return \Swift_ConfigurableSpool
      */
-    private function configurableSpool(): \Swift_ConfigurableSpool
-    {
-        return new class() extends \Swift_ConfigurableSpool {
-            public function start()
-            {
-            }
-
-            public function stop()
-            {
-            }
-
-            public function isStarted()
-            {
-            }
-
-            public function queueMessage(\Swift_Mime_SimpleMessage $message)
-            {
-            }
-
-            public function flushQueue(\Swift_Transport $transport, &$failedRecipients = null)
-            {
-            }
-        };
-    }
+    
 }

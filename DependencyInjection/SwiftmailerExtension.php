@@ -396,12 +396,5 @@ class SwiftmailerExtension extends Extension
         return new Configuration($container->getParameter('kernel.debug'));
     }
 
-    private function createChildDefinition($id)
-    {
-        if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
-            return new ChildDefinition($id);
-        }
-
-        return new DefinitionDecorator($id);
-    }
+    
 }

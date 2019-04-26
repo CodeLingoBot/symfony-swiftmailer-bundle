@@ -125,8 +125,5 @@ EOF
         $this->io->table($tableHeaders, $tableRows);
     }
 
-    private function isDefaultMailer($name)
-    {
-        return $this->getContainer()->getParameter('swiftmailer.default_mailer') === $name || 'default' === $name;
-    }
+    
 }

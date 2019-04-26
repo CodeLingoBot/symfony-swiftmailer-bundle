@@ -125,17 +125,5 @@ EOF
      *
      * @return \Swift_Message New message
      */
-    private function createMessage(InputInterface $input)
-    {
-        $message = new \Swift_Message(
-            $input->getOption('subject'),
-            $input->getOption('body'),
-            $input->getOption('content-type'),
-            $input->getOption('charset')
-        );
-        $message->setFrom($input->getOption('from'));
-        $message->setTo($input->getOption('to'));
-
-        return $message;
-    }
+    
 }
